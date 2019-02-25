@@ -2,12 +2,13 @@ version: '3'
 
 services:
   mongo-rs0-1:
-    image: 'mongo-start'
+    image: 'mongo-start1'
     build: ./mongo-rs0-1
     ports:
       - '27017:27017' # left is computer's port right side is docker internal port
     volumes:
       - ./mongo-rs0-1/data:/data/db
+      - ./test.key:/conf/test.key
     depends_on:
       - 'mongo-rs0-2'
       - 'mongo-rs0-3'
@@ -21,6 +22,7 @@ services:
     volumes:
       - ./mongo-rs0-2/data:/data/db
       - ./mongo-rs0-2/conf:/conf
+      - ./test.key:/conf/test.key
 
   mongo-rs0-3:
     image: 'mongo'
@@ -31,6 +33,7 @@ services:
     volumes:
       - ./mongo-rs0-3/data:/data/db
       - ./mongo-rs0-3/conf:/conf
+      - ./test.key:/conf/test.key
 
   setup-rs:
     image: 'setup-rs'

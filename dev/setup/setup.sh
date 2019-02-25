@@ -3,7 +3,7 @@ echo ************************************
 echo Starting the replica Set
 echo ************************************
 
-sleep 30 | echo Sleeping 30
+sleep 5 | echo Sleeping 5
 
 mongo mongodb://mongo-rs0-1:27017 mongoSetup.js
 
