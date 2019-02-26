@@ -1,11 +1,16 @@
-db.getSiblingDB('admin').createUser({
-  user: 'root',
-  pwd: 'test1234',
-  roles: [{ role: 'root', db: 'admin' }]
-});
 
-db.getSiblingDB('test').createUser({
-  user: 'test',
-  pwd: 'test1234',
-  roles: ['readWrite', 'userAdmin']
-});
+res = db.getSiblingDB('admin').createUser({
+  user: 'root',
+  pwd: 'l4D7EiDYPj',
+  roles: [{ role: 'root', db: 'admin' }]
+})
+printjson(res)
+
+
+// res = db.getSiblingDB('testa').createUser({
+//   user: 'test1',
+//   pwd: 'testtest',
+//   roles: ['readWrite', 'userAdmin'],
+//   mechanisms : ['SCRAM-SHA-1'] 
+// })
+// printjson(res)

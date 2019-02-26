@@ -3,3 +3,5 @@
 /dev/mongo-rs0-2/data/*
 
 /dev/mongo-rs0-3/data/*
+
+data

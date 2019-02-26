@@ -3,10 +3,11 @@ echo ************************************
 echo Starting the replica Set
 echo ************************************
 
-sleep 5 | echo Sleeping 5
+docker exec mongo-rs0-1 mongo mongoSetup.js
 
-mongo mongodb://mongo-rs0-1:27017 mongoSetup.js
+sleep 20 | echo Sleeping 20
 
-sleep 10 | echo Sleeping 10
+primary=`docker exec mongo-rs0-1 mongo admin --quiet --eval "db.isMaster()['primary']"`
 
-mongo --host `mongo mongo-rs0-1:27017 --quiet --eval "db.isMaster()['primary']"` dbSetup.js
+docker exec mongo-rs0-1 mongo dbSetup.js
+docker exec mongo-rs0-2 mongo dbSetup.js

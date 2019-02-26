@@ -2,46 +2,44 @@ version: '3'
 
 services:
   mongo-rs0-1:
-    image: 'mongo-start1'
-    build: ./mongo-rs0-1
+    image: 'mongo'
+    container_name: mongo-rs0-1
+    command: --replSet rs0
+    command: --config ./conf/mongo.conf
     ports:
       - '27017:27017' # left is computer's port right side is docker internal port
     volumes:
-      - ./mongo-rs0-1/data:/data/db
+      - ./data/mongo-rs0-1/data:/data/db
       - ./test.key:/conf/test.key
+      - ./mongo.conf:/conf/mongo.conf
+      - ./setup/dbSetup.js:/dbSetup.js
+      - ./setup/mongoSetup.js:/mongoSetup.js
     depends_on:
       - 'mongo-rs0-2'
       - 'mongo-rs0-3'
 
   mongo-rs0-2:
     image: 'mongo'
+    container_name: mongo-rs0-2
     command: --replSet rs0
     command: --config ./conf/mongo.conf
     ports:
-      - '27018:27018'
+      - '27018:27017'
     volumes:
-      - ./mongo-rs0-2/data:/data/db
-      - ./mongo-rs0-2/conf:/conf
+      - ./data/mongo-rs0-2/data:/data/db
       - ./test.key:/conf/test.key
+      - ./mongo.conf:/conf/mongo.conf
+      - ./setup/dbSetup.js:/dbSetup.js
 
   mongo-rs0-3:
     image: 'mongo'
+    container_name: mongo-rs0-3
     command: --replSet rs0
     command: --config ./conf/mongo.conf
     ports:
-      - '27019:27019'
+      - '27019:27017'
     volumes:
-      - ./mongo-rs0-3/data:/data/db
-      - ./mongo-rs0-3/conf:/conf
+      - ./data/mongo-rs0-3/data:/data/db
       - ./test.key:/conf/test.key
-
-  setup-rs:
-    image: 'setup-rs'
-    build: ./setup
-    depends_on:
-      - 'mongo-rs0-1' # mongo-rs0-1 서비스가 실행중이어야 해당 서비스가 실행될 수 있다.
-
-  adminmongo:
-    image: 'mrvautin/adminmongo'
-    ports:
-      - '1234:1234'
+      - ./mongo.conf:/conf/mongo.conf
+      - ./setup/dbSetup.js:/dbSetup.js
