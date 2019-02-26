@@ -1,0 +1,37 @@
+version: '2'
+services:
+
+  ## rss
+  rs01a:
+    image: mongo
+    container_name: rs01a
+    command: mongod --port 27017 --replSet rs01  --smallfiles --oplogSize 16 --keyFile /scripts/test.key
+    ports:
+      - "127.0.0.1:27117:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./data/rs01a/db:/data/db
+      - ./data/rs01a/configdb:/data/configdb
+
+  rs01b:
+    image: mongo
+    container_name: rs01b
+    command: mongod --port 27017 --replSet rs01  --smallfiles --oplogSize 16 --keyFile /scripts/test.key
+    ports:
+      - "127.0.0.1:27118:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./data/rs01b/db:/data/db
+      - ./data/rs01b/configdb:/data/configdb
+
+
+  rs01c:
+    image: mongo
+    container_name: rs01c
+    command: mongod --port 27017 --replSet rs01  --smallfiles --oplogSize 16 --keyFile /scripts/test.key
+    ports:
+      - "127.0.0.1:27119:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./data/rs01c/db:/data/db
+      - ./data/rs01c/configdb:/data/configdb
