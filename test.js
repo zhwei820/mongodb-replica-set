@@ -7,17 +7,14 @@ res = db.getSiblingDB('admin').createUser({
   })
   printjson(res)
   
-  
-  use admin;
-  db.auth('root', 'l4D7EiDYPj')
-  
-  
-  
+
+use admin;
+db.auth('root', 'l4D7EiDYPj')
+
 res = db.getSiblingDB('testa').createUser({
     user: 'test1',
     pwd: 'testtest',
     roles: ['readWrite', 'userAdmin'],
     mechanisms : ['SCRAM-SHA-1'] 
   })
-  printjson(res)
-  
+printjson(res)
