@@ -6,6 +6,7 @@ res = db.getSiblingDB('admin').createUser({
   })
   printjson(res)
   
+  // mongo -u root -p l4D7EiDYPj
   
   // res = db.getSiblingDB('testa').createUser({
   //   user: 'test1',

@@ -1,42 +1,43 @@
 version: '2'
 services:
 
+
   ## rss
   rs01a:
-    image: mongo
+    build: ./
     container_name: rs01a
-    command: mongod --port 27017 --replSet rs01  --smallfiles --oplogSize 16 --keyFile /scripts/test.key
+    network_mode: bridge
+    command: '--port 27017 --replSet rs01  --smallfiles --oplogSize 16 --enableMajorityReadConcern false --keyFile /scripts/test.key'
     ports:
-      - "27117:27017"
+      - "0.0.0.0:27117:27017"
     volumes:
-      - ./scripts:/scripts
       - ./data/rs01a/db:/data/db
       - ./data/rs01a/configdb:/data/configdb
     extra_hosts:
-      - "basehost:10.9.150.22"
+      - "basehost:192.168.1.6"
 
   rs01b:
-    image: mongo
+    build: ./
     container_name: rs01b
-    command: mongod --port 27017 --replSet rs01  --smallfiles --oplogSize 16 --keyFile /scripts/test.key
+    network_mode: bridge
+    command: '--port 27017 --replSet rs01  --smallfiles --oplogSize 16 --enableMajorityReadConcern false --keyFile /scripts/test.key'
     ports:
-      - "27118:27017"
+      - "0.0.0.0:27118:27017"
     volumes:
-      - ./scripts:/scripts
       - ./data/rs01b/db:/data/db
       - ./data/rs01b/configdb:/data/configdb
     extra_hosts:
-      - "basehost:10.9.150.22"
+      - "basehost:192.168.1.6"
 
   rs01c:
-    image: mongo
+    build: ./
     container_name: rs01c
-    command: mongod --port 27017 --replSet rs01  --smallfiles --oplogSize 16 --keyFile /scripts/test.key
+    network_mode: bridge
+    command: '--port 27017 --replSet rs01  --smallfiles --oplogSize 16 --enableMajorityReadConcern false --keyFile /scripts/test.key'
     ports:
-      - "27119:27017"
+      - "0.0.0.0:27119:27017"
     volumes:
-      - ./scripts:/scripts
       - ./data/rs01c/db:/data/db
       - ./data/rs01c/configdb:/data/configdb
     extra_hosts:
-      - "basehost:10.9.150.22"
+      - "basehost:192.168.1.6"
